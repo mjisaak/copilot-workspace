@@ -1,74 +1,57 @@
 # Copilot-Workspace Demo
 
-## Hangman Game
+## .NET Application with Customer Management
 
-The Hangman game is a classic word-guessing game. The player tries to guess the word by suggesting letters within a certain number of attempts.
+This repository contains a .NET application with 2 REST methods to add a new customer and add this customer to a SQL Database.
 
-### How to Run the Game
+### How to Run the Application
 
-To run the Hangman game, follow these steps:
+1. Navigate to the `src` directory:
+   ```
+   cd src
+   ```
+2. Run the .NET application:
+   ```
+   dotnet run
+   ```
 
-1. Make sure you have Python installed on your system.
-2. Open a terminal or command prompt.
-3. Navigate to the `src` folder in the repository.
-4. Run the following command:
+### Configuring the SQL Database Connection String
 
-```sh
-python hangman.py
-```
+1. Open the `src/appsettings.json` file.
+2. Update the `DefaultConnection` string with your SQL Database connection details:
+   ```json
+   {
+     "ConnectionStrings": {
+       "DefaultConnection": "Server=YOUR_SERVER;Database=CustomerAppDb;Trusted_Connection=True;MultipleActiveResultSets=true"
+     },
+     "Logging": {
+       "LogLevel": {
+         "Default": "Information",
+         "Microsoft": "Warning",
+         "Microsoft.Hosting.Lifetime": "Information"
+       }
+     },
+     "AllowedHosts": "*"
+   }
+   ```
 
-### Example Output
+### Example REST API Requests
 
-```
-Welcome to Hangman!
-You have 6 attempts to guess the word.
-Current word: _______
-Guessed letters: 
-Enter a letter: e
-Good guess!
-Current word: e_e_____
-Guessed letters: e
-Enter a letter: a
-Wrong guess.
-You have 5 attempts left.
-Current word: e_e_____
-Guessed letters: e a
-Enter a letter: t
-Good guess!
-Current word: e_e__t__
-Guessed letters: e a t
-Enter a letter: r
-Wrong guess.
-You have 4 attempts left.
-Current word: e_e__t__
-Guessed letters: e a t r
-Enter a letter: n
-Good guess!
-Current word: e_e__t_n
-Guessed letters: e a t r n
-Enter a letter: p
-Good guess!
-Current word: e_e__t_n
-Guessed letters: e a t r n p
-Enter a letter: h
-Good guess!
-Current word: e_e_h_t_n
-Guessed letters: e a t r n p h
-Enter a letter: o
-Good guess!
-Current word: e_e_h_ton
-Guessed letters: e a t r n p h o
-Congratulations! You guessed the word: elephant
-```
-
-### ASCII Art
+#### Add a New Customer
 
 ```
-  +---+
-  |   |
-  O   |
- /|\  |
- / \  |
-      |
-=========
+POST /api/customer
+Content-Type: application/json
+
+{
+  "name": "John Doe",
+  "email": "john.doe@example.com",
+  "phone": "123-456-7890"
+}
+```
+
+#### Get a Customer by ID
+
+```
+GET /api/customer/{id}
 ```
